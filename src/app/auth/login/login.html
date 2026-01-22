@@ -1,0 +1,48 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    
+    <!-- Brand / Logo -->
+    <div class="brand">
+      <span class="logo-circle">EY</span>
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to your account</p>
+    </div>
+ 
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+ 
+      <div class="field">
+        <label>Email Address</label>
+        <div class="input-wrapper">
+          <i class="icon email-icon"></i>
+          <input type="email" formControlName="email" placeholder="name@company.com">
+        </div>
+      </div>
+ 
+      <div class="field">
+        <label>Password</label>
+        <div class="input-wrapper">
+          <i class="icon lock-icon"></i>
+          <input type="password" formControlName="password" placeholder="••••••••">
+        </div>
+      </div>
+ 
+      <button class="btn-primary" type="submit" [disabled]="loading">
+        <span *ngIf="!loading">Sign In</span>
+        <span *ngIf="loading" class="loader"></span>
+      </button>
+ 
+      <div class="error" *ngIf="errorMsg">{{ errorMsg }}</div>
+    </form>
+ 
+    <div class="divider">OR</div>
+ 
+    <button class="btn-secondary" (click)="goToRegister()">
+      Create New Account
+    </button>
+ 
+    <p class="footer-text">
+      © 2026 EY Global Delivery Services
+    </p>
+  </div>
+</div>
+ 
