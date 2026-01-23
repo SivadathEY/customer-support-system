@@ -1,0 +1,29 @@
+<div class="card">
+  <h2>👩‍💼 Admin Dashboard</h2>
+  <p>Select a dashboard to view insights</p>
+ 
+  <div style="display:flex; gap:20px; margin-top:20px;">
+ 
+    <!-- SLA Dashboard -->
+    <div class="card" style="flex:1; cursor:pointer;"
+         routerLink="/reports/sla">
+      <h3>⏱ SLA Compliance</h3>
+      <p>View SLA met vs breached tickets</p>
+    </div>
+ 
+    <!-- Agent Performance -->
+    <div class="card" style="flex:1; cursor:pointer;"
+         routerLink="/reports/agents">
+      <h3>👨‍💻 Agent Performance</h3>
+      <p>Analyze agent workload & SLA compliance</p>
+    </div>
+ 
+    <!-- Ticket Aging -->
+    <div class="card" style="flex:1; cursor:pointer;"
+         routerLink="/reports/aging">
+      <h3>🕒 Ticket Aging</h3>
+      <p>Identify high-risk pending tickets</p>
+    </div>
+ 
+  </div>
+</div>

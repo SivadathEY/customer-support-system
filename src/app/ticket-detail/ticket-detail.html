@@ -1,0 +1,55 @@
+
+<!-- src/app/ticket-detail/ticket-detail.html -->
+<h2>Tickets</h2>
+
+<div *ngIf="loadingList">Loading…</div>
+<div class="status" *ngIf="listError" style="color:#b00020">{{ listError }}</div>
+
+<!-- EXACT same list layout as in ticket-creation.html -->
+<ul *ngIf="!loadingList && tickets?.length">
+  <li *ngFor="let t of tickets; trackBy: trackById">
+    <b>#{{ t.id }}</b> — {{ t.title }} ({{ t.priority }}) ({{ t.status }}) by {{ t.createdByUserId }}
+
+    <!-- Optional: inline status change (preferred as requested) -->
+    <div class="inline-controls" style="margin-top:6px">
+      <label for="status-{{ t.id }}">Change status:</label>
+     
+<select
+  id="status-{{ t.id }}"
+  #statusSel
+  [value]="t.status"
+  (change)="onStatusSelect(t, statusSel.value)"
+  [disabled]="isSaving(t.id)"
+>
+  <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+</select>
+
+
+      <button
+        type="button"
+        (click)="saveStatus(t)"
+        [disabled]="isSaving(t.id) || !pendingStatus[t.id]"
+      >
+        {{ isSaving(t.id) ? 'Saving…' : 'Update' }}
+      </button>
+
+      <small class="ok" *ngIf="lastSavedOk[t.id]" style="color:#2e7d32; margin-left:6px">
+        {{ lastSavedOk[t.id] }}
+      </small>
+      <small class="err" *ngIf="lastSavedErr[t.id]" style="color:#b00020; margin-left:6px">
+        {{ lastSavedErr[t.id] }}
+      </small>
+    </div>
+
+    <!-- Navigate to detail page (existing behavior) -->
+    <div style="margin-top:4px">
+      <button type="button" class="as-link mono" (click)="open(t.id)" title="{{ t.id }}">
+        Open: {{ t.id | slice:0:8 }}
+      </button>
+    </div>
+
+    <hr />
+  </li>
+</ul>
+
+<div *ngIf="!loadingList && !tickets?.length">No tickets.</div>

@@ -1,0 +1,24 @@
+<div class="card">
+  <h2>👨‍💻 Agent Performance Report</h2>
+ 
+  <table>
+    <tr>
+      <th>Agent Name</th>
+      <th>Tickets Handled</th>
+      <th>SLA Breaches</th>
+      <th>SLA Compliance %</th>
+    </tr>
+ 
+    <tr *ngFor="let agent of agents">
+      <td>{{ agent.agentName }}</td>
+      <td>{{ agent.ticketsHandled }}</td>
+      <td class="high">{{ agent.slaBreachedCount }}</td>
+      <td
+        [class.low]="agent.slaPercent >= 80"
+        [class.medium]="agent.slaPercent < 80 && agent.slaPercent >= 60"
+        [class.high]="agent.slaPercent < 60">
+        {{ agent.slaPercent | number:'1.0-2' }}%
+      </td>
+    </tr>
+  </table>
+</div>

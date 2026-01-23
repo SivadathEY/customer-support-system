@@ -1,0 +1,64 @@
+
+<!-- src/app/components/ticket-creation/ticket-creation.html -->
+<div class="ticket-creation">
+  <h2>Create Ticket</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <small class="err" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+        Title is required (max 200 chars).
+      </small>
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <textarea rows="4" formControlName="description"></textarea>
+      <small class="err" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+        Description is required.
+      </small>
+    </div>
+
+    <div class="field">
+      <label>Category</label>
+      <input type="number" formControlName="categoryId" />
+      <small class="err" *ngIf="form.get('categoryId')?.touched && form.get('categoryId')?.invalid">
+        Category is required (>= 0).
+      </small>
+    </div>
+
+    <div class="field">
+      <label>Priority</label>
+      <select formControlName="priority">
+        <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Created By (UserId GUID)</label>
+      <input type="text" formControlName="createdByUserId" />
+      <small class="err" *ngIf="form.get('createdByUserId')?.touched && form.get('createdByUserId')?.invalid">
+        GUID is required.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="submitting">Create</button>
+  </form>
+
+  <div class="status" *ngIf="error" style="color:#b00020">{{ error }}</div>
+  <div class="status" *ngIf="successMsg" style="color:#2e7d32">{{ successMsg }}</div>
+
+  <hr />
+
+  <h3>Existing Tickets</h3>
+  <div *ngIf="loadingList">Loading…</div>
+  <div class="status" *ngIf="listError" style="color:#b00020">{{ listError }}</div>
+
+  <ul *ngIf="!loadingList && tickets?.length">
+    <li *ngFor="let t of tickets">
+      <b>#{{ t.id }}</b> — {{ t.title }} ({{ t.priority }}) ({{ t.status }}) by {{ t.createdByUserId }}
+    </li>
+  </ul>
+  <div *ngIf="!loadingList && !tickets?.length">No tickets.</div>
+</div>

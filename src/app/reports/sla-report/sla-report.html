@@ -1,0 +1,25 @@
+<div class="card">
+  <h2>⏱ SLA Compliance Overview</h2>
+ 
+  <div style="display:flex; gap:20px; margin-top:20px;">
+    <div class="card" style="flex:1;">
+      <h3>📦 Total Tickets</h3>
+      <h2>{{ report?.totalTickets }}</h2>
+    </div>
+ 
+    <div class="card" style="flex:1;">
+      <h3>✅ SLA Met</h3>
+      <h2 class="low">{{ report?.slaMet }}</h2>
+    </div>
+ 
+    <div class="card" style="flex:1;">
+      <h3>❌ SLA Breached</h3>
+      <h2 class="high">{{ report?.slaBreached }}</h2>
+    </div>
+  </div>
+ 
+  <hr>
+ 
+  <h3>📈 SLA Compliance</h3>
+  <h2>{{ compliancePercent | number:'1.0-2' }}%</h2>
+</div>
