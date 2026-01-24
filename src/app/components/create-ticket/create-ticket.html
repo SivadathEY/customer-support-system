@@ -1,0 +1,37 @@
+<div class="container" style="max-width: 600px; margin: 2rem auto;">
+  <h2>Create New Ticket</h2>
+  
+  <div *ngIf="message" class="alert" [ngClass]="message.includes('Success') ? 'alert-success' : 'alert-danger'">
+    {{ message }}
+  </div>
+ 
+  <form (ngSubmit)="onSubmit()" #ticketForm="ngForm">
+    
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" [(ngModel)]="ticket.title" name="title" required>
+    </div>
+ 
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select class="form-control" [(ngModel)]="ticket.categoryId" name="category">
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+ 
+    <div class="mb-3">
+      <label class="form-label">Priority</label>
+      <select class="form-control" [(ngModel)]="ticket.priority" name="priority">
+        <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+      </select>
+    </div>
+ 
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" [(ngModel)]="ticket.description" name="description" rows="4" required></textarea>
+    </div>
+ 
+    <button type="submit" class="btn btn-primary" [disabled]="!ticketForm.form.valid">Submit Ticket</button>
+  </form>
+</div>
+ 

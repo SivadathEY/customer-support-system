@@ -1,0 +1,30 @@
+<div style="border: 1px solid #ccc; padding: 20px; margin-top: 20px; border-radius: 8px; background-color: #f9f9f9;">
+  <h3>Ticket Lifecycle Manager (Dev 2)</h3>
+  <p>Paste the ID from the "Create" section to manage the ticket.</p>
+  
+  <div style="margin-bottom: 15px;">
+    <input type="text" placeholder="Paste Ticket ID here..." [(ngModel)]="ticketIdInput" style="width: 300px; padding: 5px;">
+    <button (click)="searchTicket()" style="margin-left: 10px; padding: 5px 15px; cursor: pointer;">Load Ticket</button>
+  </div>
+ 
+  <div *ngIf="message" style="color: blue; font-weight: bold; margin-bottom: 10px;">{{ message }}</div>
+ 
+  <div *ngIf="ticket" style="border-top: 2px dashed #999; padding-top: 15px;">
+    <h4>{{ ticket.title }}</h4>
+    <p><strong>Description:</strong> {{ ticket.description }}</p>
+    <p><strong>Current Priority:</strong> {{ ticket.priority }}</p>
+    <p><strong>Current Status:</strong> <span style="background-color: yellow; padding: 2px 5px;">{{ ticket.status }}</span></p>
+    
+    <hr>
+    
+    <label><strong>Change Lifecycle Stage:</strong></label><br>
+    <select [(ngModel)]="selectedStatus" style="padding: 5px; margin-right: 10px;">
+      <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+    </select>
+    
+    <button (click)="updateStatus()" style="background-color: green; color: white; padding: 5px 15px; border: none; cursor: pointer;">
+      Update Status
+    </button>
+  </div>
+</div>
+ 
